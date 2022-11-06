@@ -1,0 +1,43 @@
+.cont-title {
+    background: #000;
+}
+
+.cont-title svg{
+    width: 50vw;
+    height: auto;
+}
+
+body {
+    background: #aaa !important;
+}
+
+.container{
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+.led {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    border: 2px solid #000;
+    cursor: pointer;
+    user-select: none;
+}
+
+.led_rojo{
+    background-color: #F00;
+}
+
+.led_verde{
+    background-color: #0F0;
+}
+
+.led_azul{
+    background-color: #00F;
+}
+
+.led_blanco{
+    background-color: #fff;
+}
