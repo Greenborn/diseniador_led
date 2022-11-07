@@ -14,6 +14,17 @@ const materiales = {
         { i:3, t: 'Blanco', c:'FFF', ct:'000', costo:12},
         { i:4, t: 'Borrar', c:'222222', ct:'FFF', costo:0}
     ],
+    fuentes:[
+        { a: 1.1, costo: 480 },
+        { a: 1.9, costo: 770 },
+        { a: 2.8, costo: 991 },
+        { a: 3.5, costo: 1300 },
+        { a: 4.5, costo: 1500 },
+        { a: 5.8, costo: 2200 },
+        { a: 6.8, costo: 3600 },
+        { a: 7.8, costo: 4380 },
+        { a: 8.8, costo: 5200 }
+    ],
     tam_led: .5
 }
 
@@ -168,8 +179,20 @@ function presupuesto_cables(leds){
     return { t: "Cables", v: 150 + leds.cant }
 }
 
-function presupuesto_fuente(){
-    return { t: "Fuente alimentación 12v", v: 480 }
+function presupuesto_fuente(leds){
+    let consumo_amperes = (leds.cant/3*0.02)
+    let fuente = null
+    for (let i=0; i < materiales.fuentes.length; i++){
+        if (consumo_amperes < materiales.fuentes[i].a){
+            fuente = materiales.fuentes[i]
+            break;
+        }
+    }
+    if (fuente == null){
+        alert('No se encontro una fuente de alimentación adecuada, por favor consulte.')
+        return { t: "No se encontro una fuente de alimentación adecuada, por favor consulte", v: null }
+    }
+    return { t: "Fuente alimentación 12v", v: fuente.costo }
 }
 
 function presupuesto_mano_obra(leds){
@@ -186,12 +209,14 @@ function presupuesto_leds(leds){
 
 function actualiza_presupuesto(){
     let leds = obtener_leds()
+    let consumo_amperes = (leds.cant/3*0.02)
+
     presupuesto = []
     presupuesto.push(presupuesto_base())
     presupuesto.push(presupuesto_leds(leds))
     presupuesto.push(presupuesto_comp_elec(leds))
     presupuesto.push(presupuesto_cables(leds))
-    presupuesto.push(presupuesto_fuente())
+    presupuesto.push(presupuesto_fuente(leds))
     presupuesto.push(presupuesto_mano_obra(leds))
     presupuesto.push(presupuesto_impuestos())
 
@@ -205,6 +230,11 @@ function actualiza_presupuesto(){
     html += '<li class="list-group-item active">Total: $'+sumatoria+'</li>'
     presup_cont.innerHTML = html
 
+    //calculo de consumo
+    let caracteristicas = document.getElementById("caracteristicas")
+    html = "<li class='list-group-item active'><b>Caracteristicas Generales</b></li><li class='list-group-item'> Led's de Alta luminosidad y Bajo consumo, como los utilizados en los semáforos.</li><li class='list-group-item'> Trabajo local, armado de forma artesanal.</li>"
+    html += "<li class='list-group-item'> Consumo Total a 12v: "+consumo_amperes+"A = "+ consumo_amperes * 12 +"W</li>"
+    caracteristicas.innerHTML = html
     console.log(configuracion.data_)
 }
 
