@@ -3,17 +3,18 @@
 }
 
 .cont-title svg{
-    width: 50vw;
+    width: 15vw;
     height: auto;
 }
 
 body {
-    background: #aaa !important;
+    background: #eee !important;
 }
 
 .container{
     background-color: #fff;
-    min-height: 100vh;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
 }
 
 .led {
@@ -28,7 +29,6 @@ body {
 .pc{
     overflow: scroll;
     height: 50vh;
-    border: 1px solid #000;
     background-color: #fff8dc;
 }
 

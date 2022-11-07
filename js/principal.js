@@ -22,6 +22,8 @@ let selector_alto = null
 let selector_material = null
 let led_cont = null
 let pixel_cont = null
+let btn_descargar = null
+let btn_reset = null
 
 let configuracion = {
     ancho: 0,
@@ -38,6 +40,8 @@ function inicializar(){
     selector_alto = document.getElementById("alto")
     selector_material = document.getElementById("material")
     pixel_cont = document.getElementsByClassName("pc")[0]
+    btn_descargar = document.getElementById("btn_descargar")
+    btn_reset = document.getElementById("reset_btn")
 
     selector_material.innerHTML = '<option value="'+materiales.base[0].i+'" selected>'+materiales.base[0].t+'</option>'
     for (let i=1; i<materiales.base.length;i++){
@@ -56,6 +60,7 @@ function inicializar(){
     selector_alto.addEventListener("change", ()=>{  actualiza_lienzo() })
     selector_ancho.addEventListener("change", ()=>{ actualiza_lienzo() })
     selector_material.addEventListener("change", ()=>{ actualiza_presupuesto() })
+    btn_reset.addEventListener("click", ()=>{ reset() })
     actualiza_lienzo()
 }
 
@@ -89,13 +94,12 @@ function pixel_click( evnt ){
         elemn.innerHTML = ''
         configuracion.data_[elemn.getAttribute('data-x')][elemn.getAttribute('data-y')] = undefined
     } else {
-        elemn.innerHTML = '<i style="background: #'+configuracion.led_elegido.c+';"></i>'
+        elemn.innerHTML = '<i style="background: #'+configuracion.led_elegido.c+'; box-shadow: 0px 0px .25rem .25rem #'+configuracion.led_elegido.c+';"></i>'
         configuracion.data_[elemn.getAttribute('data-x')][elemn.getAttribute('data-y')] = configuracion.led_elegido 
     }
 }
 
-
-function actualiza_lienzo(){
+function actualiza_lienzo( muestra = undefined){
     configuracion.alto = selector_alto.value;
     configuracion.ancho = selector_ancho.value;
     if (configuracion.alto < 0)  { selector_alto.value = 10; configuracion.alto = 10 }
@@ -128,7 +132,7 @@ function actualiza_lienzo(){
 
     let pixels = document.getElementsByClassName("pix")
     for (let i=0; i < pixels.length; i++){
-        pixels[i].addEventListener("mousedown", ()=> {mouse_down = true; actualiza_presupuesto()} )
+        pixels[i].addEventListener("mousedown", (e)=> {mouse_down = true; pixel_click(e); actualiza_presupuesto()} )
         pixels[i].addEventListener("mouseup", ()=> {mouse_down = false; actualiza_presupuesto()}  )
         pixels[i].addEventListener("mousemove", pixel_click )
     }
@@ -192,7 +196,7 @@ function actualiza_presupuesto(){
     presupuesto.push(presupuesto_impuestos())
 
     let presup_cont = document.getElementById("presup_cont")
-    let html = '<li class="list-group-item active">Presupuesto</li>'
+    let html = '<li class="list-group-item active"><b>Presupuesto</b></li>'
     let sumatoria = 0
     for(let i=0; i < presupuesto.length; i++){
         html += '<li class="list-group-item d-flex justify-content-between align-items-center">'+presupuesto[i].t+'<span class="badge bg-primary rounded-pill">$ '+presupuesto[i].v+'</span></li>'
@@ -200,9 +204,22 @@ function actualiza_presupuesto(){
     }
     html += '<li class="list-group-item active">Total: $'+sumatoria+'</li>'
     presup_cont.innerHTML = html
+
+    console.log(configuracion.data_)
 }
 
-function reset(){
+function descargar_presupuesto(){
+    
+}
 
+
+
+function reset(){
+    let muestra = []
+
+    selector_alto.value = 25
+    selector_ancho.value = 50
+    selector_material.value = 1
+    actualiza_lienzo(muestra)
 }
   
