@@ -40,7 +40,7 @@ let configuracion = {
     ancho: 0,
     alto: 0,
     material: {},
-    led_elegido: undefined,
+    led_elegido: materiales.leds[0],
     zoom: .5,
     data_:[]
 }
@@ -233,7 +233,7 @@ function actualiza_presupuesto(){
     //calculo de consumo
     let caracteristicas = document.getElementById("caracteristicas")
     html = "<li class='list-group-item active'><b>Caracteristicas Generales</b></li><li class='list-group-item'> Led's de Alta luminosidad y Bajo consumo, como los utilizados en los semáforos.</li><li class='list-group-item'> Trabajo local, armado de forma artesanal.</li>"
-    html += "<li class='list-group-item'> Consumo Total a 12v: "+consumo_amperes+"A = "+ consumo_amperes * 12 +"W</li>"
+    html += "<li class='list-group-item'> Consumo Total a 12v: "+Number(consumo_amperes).toFixed(2)+"A = "+ Number(consumo_amperes * 12).toFixed(2) +"W</li>"
     caracteristicas.innerHTML = html
     console.log(configuracion.data_)
 }
