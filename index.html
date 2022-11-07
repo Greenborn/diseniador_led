@@ -188,11 +188,10 @@
                 <div class="col">
                     <h3>Modo de uso</h3>
                     <ol class="list-group-numbered">
-                        <li class="list-group-item">Seleccione el ancho, alto (en Centimetros) y tipo de base</li>
-                        <li class="list-group-item">Eliga los colores haciendo click en los circulos coloreados</li>
-                        <li class="list-group-item">Pinte la grilla con los colores deseados</li>
-                        <li class="list-group-item">A medida que calcule el costo, en la zona inferior se genera el presupuesto detallado</li>
-                        <li class="list-group-item">También puede descargar su presupuesto como .pdf</li>
+                        <li class="list-group-item">Seleccione el ancho, alto (en Centimetros) y tipo de base.</li>
+                        <li class="list-group-item">Eliga un color y haga click en la grilla pixel por pixel.</li>
+                        <li class="list-group-item">A medida que se modifica el diseño, se calcula el presupuesto.</li>
+                        <li class="list-group-item">También puede descargar su presupuesto como .pdf.</li>
                     </ol>
                 </div>
             </div>
@@ -201,11 +200,11 @@
                 <div class="col">
                     <form class="row g-3">
                         <div class="col-auto">
-                          <label for="ancho" class="form-label">Ancho</label>
+                          <label for="ancho" class="form-label">Ancho (cm)</label>
                           <input type="number" class="form-control" id="ancho" min="10" max="200" value="50">
                         </div>
                         <div class="col-auto">
-                            <label for="ancho" class="form-label">Alto</label>
+                            <label for="ancho" class="form-label">Alto (cm)</label>
                             <input type="number" class="form-control" id="alto" min="10" max="200" value="25">
                         </div>
                         <div class="col-auto">
@@ -231,8 +230,9 @@
             </div>
 
             <div class="row">
-                <div class="col">
-                    
+                <div class="col-sm-6 col-lg-4">
+                    <ul id="presup_cont" class="list-group">
+                    </ul>
                 </div>
             </div>
         </div>
