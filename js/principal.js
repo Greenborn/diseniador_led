@@ -180,7 +180,7 @@ function presupuesto_cables(leds){
 }
 
 function presupuesto_fuente(leds){
-    let consumo_amperes = (leds.cant/3*0.02)
+    let consumo_amperes = (leds.cant/3*0.012)
     let fuente = null
     for (let i=0; i < materiales.fuentes.length; i++){
         if (consumo_amperes < materiales.fuentes[i].a){
@@ -209,7 +209,7 @@ function presupuesto_leds(leds){
 
 function actualiza_presupuesto(){
     let leds = obtener_leds()
-    let consumo_amperes = (leds.cant/3*0.02)
+    let consumo_amperes = (leds.cant/3*0.012)
 
     presupuesto = []
     presupuesto.push(presupuesto_base())
